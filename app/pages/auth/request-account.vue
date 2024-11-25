@@ -120,7 +120,7 @@ const requestAccount = async ({values, valid, errors}: FormSubmitEvent) => {
               </FormField>
               <FormField v-slot="$field" name="countyId" initialValue="" class="space-y-1">
                 <FloatLabel variant="on" class="md:col-span-1">
-                  <Select id="countyId" :options="counties?.data.sort((a, b) => a.name.localeCompare(b.name))" optionLabel="name" optionValue="id" fluid showClear />
+                  <Select id="countyId" :options="counties?.data?.sort((a, b) => a.name.localeCompare(b.name))" optionLabel="name" optionValue="id" fluid showClear />
                   <label for="countyId">County of Assignment</label>
                 </FloatLabel>
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple">{{ $field.error.message }}</Message>
