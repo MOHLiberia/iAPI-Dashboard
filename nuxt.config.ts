@@ -15,6 +15,9 @@ export default defineNuxtConfig({
   devServer: {
     port: 3001
   },
+  alias: {
+
+  },
   runtimeConfig: {
     public: {
       apiUrl: '',
@@ -23,7 +26,7 @@ export default defineNuxtConfig({
   },
   primevue: {
     importTheme: {
-      from: '@/theme/myTheme.js'
+      from: '@/themes/myTheme.js'
     }
   },
 })
