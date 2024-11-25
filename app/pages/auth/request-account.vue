@@ -1,3 +1,4 @@
+<!--suppress TypeScriptCheckImport -->
 <script setup lang="ts">
 import {zodResolver} from "@primevue/forms/resolvers/zod";
 import {z} from "zod";

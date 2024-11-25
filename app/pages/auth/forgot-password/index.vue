@@ -20,7 +20,7 @@ const login = async () => {
 
 <template>
     <Card class="md:w-[500px]">
-      <template #title><div class="w-full text-left text-xl">Forgot Passsword</div></template>
+      <template #title><div class="w-full text-left text-xl">Forgot Password</div></template>
       <template #subtitle><div class="w-full text-left mb-2">Type in your username or email to reset your password.</div></template>
       <template #content>
         <div class="flex flex-col gap-4 w-full">
