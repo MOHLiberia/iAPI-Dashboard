@@ -1,0 +1,35 @@
+{
+  "name": "iAPI Dashboard",
+  "version": "0.0.1",
+  "description": "Ministry of Health - Liberia, API Layer",
+  "author": "Calvin Coleman / MOH ICT Unit",
+  "license": "ISC",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "@pinia/nuxt": "^0.7.0",
+    "@primevue/auto-import-resolver": "^4.2.3",
+    "@primevue/forms": "^4.2.3",
+    "@primevue/themes": "^4.2.3",
+    "nuxt": "^3.14.1592",
+    "pinia": "^2.2.6",
+    "primevue": "^4.2.3",
+    "vue": "latest",
+    "vue-router": "latest",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@primevue/nuxt-module": "^4.2.3"
+  },
+  "engines": {
+    "node": ">=20.17.0"
+  }
+}
