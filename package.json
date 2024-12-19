@@ -8,25 +8,31 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/icon": "^1.9.0",
+    "@nuxtjs/color-mode": "^3.5.2",
     "@nuxtjs/tailwindcss": "^6.12.2",
     "@pinia/nuxt": "^0.7.0",
     "@primevue/auto-import-resolver": "^4.2.3",
     "@primevue/forms": "^4.2.3",
     "@primevue/themes": "^4.2.3",
+    "chart.js": "^4.4.7",
     "nuxt": "^3.14.1592",
     "pinia": "^2.2.6",
+    "pinia-plugin-persistedstate": "^4.1.3",
+    "primeicons": "^7.0.0",
     "primevue": "^4.2.3",
     "vue": "latest",
     "vue-router": "latest",
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@iconify-json/tabler": "^1.2.10",
     "@primevue/nuxt-module": "^4.2.3"
   },
   "engines": {

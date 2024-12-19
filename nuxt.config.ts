@@ -10,7 +10,10 @@ export default defineNuxtConfig({
   modules: [
     '@primevue/nuxt-module',
     '@nuxtjs/tailwindcss',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
+    '@nuxt/icon',
+    '@nuxtjs/color-mode',
   ],
   devServer: {
     port: 3001
@@ -24,6 +27,6 @@ export default defineNuxtConfig({
   primevue: {
     importTheme: {
       from: '@/theme/myTheme.ts'
-    }
+    },
   },
 })
