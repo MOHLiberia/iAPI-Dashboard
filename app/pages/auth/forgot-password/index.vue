@@ -1,21 +1,65 @@
 <script setup lang="ts">
+import {zodResolver} from "@primevue/forms/resolvers/zod"
+import {z} from 'zod'
+import type {FormSubmitEvent} from "@primevue/forms";
+
 definePageMeta({
   layout: 'auth'
 })
 
-import {type ToastServiceMethods, useToast} from "primevue";
-import {capitalize} from "vue";
+const config = useRuntimeConfig()
+const toastService = usePVToastService()
+const pending = ref(false)
 
-const toast:ToastServiceMethods = useToast()
+const resolver = ref(zodResolver(
+    z.object({
+      usernameOrEmail: z.string().min(1, 'Your username or email is required.'),
+    })
+))
 
-const showToast = (severity: "error" | "success" | "info" | "warn" | "secondary" | "contrast", message: string, life: number = 3000)=> {
-  toast.add({severity, summary: capitalize(severity), detail: message, life})
+const onSubmit = async ({valid, values, errors}:FormSubmitEvent) => {
+  pending.value = true
+  if (valid) {
+    await $fetch(`${config.public.apiUrl}/auth/forgot-password`, {
+      method: 'POST',
+      headers: {
+        'api-key': config.public.apiKey,
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(values),
+    })
+        .then(async (res) => {
+          toastService.add({
+            severity: 'success',
+            summary: res.status,
+            detail: res.message,
+            life: 10000
+          })
+        }).catch((err) => {
+          toastService.add({
+            severity: 'error',
+            summary: err.data?.status || 'Error',
+            detail: err.data?.message || 'Something went wrong. If this continues, please get in touch with the ICT Unit.',
+            life: 10000
+          })
+        })
+        .finally(()=> {
+          pending.value = false
+        })
+  } else {
+    pending.value = false
+    for (const e in errors) {
+      toastService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: errors[e][0].message,
+        life: 3000,
+      })
+    }
+  }
 }
 
-const login = async () => {
-  showToast('success', 'Login Successful')
-  await navigateTo('/')
-}
+
 </script>
 
 <template>
@@ -23,23 +67,20 @@ const login = async () => {
       <template #title><div class="w-full text-left text-xl">Forgot Password</div></template>
       <template #subtitle><div class="w-full text-left mb-2">Type in your username or email to reset your password.</div></template>
       <template #content>
-        <div class="flex flex-col gap-4 w-full">
-          <div class="w-full space-y-2">
+        <Form :resolver class="flex flex-col gap-3 w-full" @submit="onSubmit">
+          <FormField v-slot="$field" name="usernameOrEmail" initialValue="" class="w-full space-y-2">
             <FloatLabel variant="on">
               <InputText id="usernameOrEmail" class="w-full" type="text"/>
               <label for="usernameOrEmail">Username or Email</label>
             </FloatLabel>
-          </div>
+            <Message v-if="$field.invalid" severity="error" size="small" variant="simple">{{ $field.error.message }}</Message>
+          </FormField>
           <div class="flex justify-between">
             <NuxtLink to="/auth/login" class="hover:underline hover:underline-offset-4 text-blue-500 text-sm">Login</NuxtLink>
             <NuxtLink to="/auth/request-account" class="hover:underline hover:underline-offset-4 text-blue-500 text-sm">Request Account</NuxtLink>
           </div>
-        </div>
-      </template>
-      <template #footer>
-        <div class="mt-2">
-          <Button label="Reset Password" class="w-full" @click="login" />
-        </div>
+          <Button label="Submit" class="w-full" type="submit" :disabled="pending" :loading="pending" />
+        </Form>
       </template>
     </Card>
 </template>
