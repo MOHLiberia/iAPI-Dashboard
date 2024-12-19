@@ -1,11 +1,12 @@
 <script setup lang="ts">
-
+definePageMeta({
+  title: 'Dashboard',
+  name: 'Account'
+})
 </script>
 
 <template>
-  <div>
-    Account Page
-  </div>
+
 </template>
 
 <style scoped>
