@@ -10,9 +10,9 @@ definePageMeta({
 
 const toastService = usePVToastService()
 const config = useRuntimeConfig()
-const pending = ref(false)
+const loading = ref(false)
 
-const {data: counties} = await useFetch(`${config.public.apiUrl}/counties`, {
+const {data: counties, pending} = useFetch(`${config.public.apiUrl}/counties`, {
   method: 'GET',
   headers: {
     'api-key': config.public.apiKey.toString(),
@@ -22,7 +22,7 @@ const {data: counties} = await useFetch(`${config.public.apiUrl}/counties`, {
 const resolver = ref(zodResolver(
     z.object({
       firstName: z.string().min(1, 'First name is required.').trim(),
-      middleName: z.string().min(1, 'Middle name is required.').trim(),
+      middleName: z.string().min(1, 'Middle name is required.').trim().or(z.string().max(0).trim()),
       lastName: z.string().min(1, 'Last name is required.').trim(),
       email: z.string().min(1, 'Your email is required.').email('Valid email is required.').trim(),
       position: z.string().min(1, 'Your position is required.').trim(),
@@ -34,9 +34,8 @@ const resolver = ref(zodResolver(
 ))
 
 const requestAccount = async ({values, valid, errors}: FormSubmitEvent) => {
+  loading.value = true
   if (valid) {
-    pending.value = true
-    console.log(values)
     await $fetch(`${config.public.apiUrl}/account-request`, {
       method: 'POST',
       body: JSON.stringify(values),
@@ -46,9 +45,6 @@ const requestAccount = async ({values, valid, errors}: FormSubmitEvent) => {
       },
       ignoreResponseErrors: true
     })
-        .then((res) => {
-          return res
-        })
         .then(async (res) => {
               toastService.add({
                 severity: 'success',
@@ -67,9 +63,10 @@ const requestAccount = async ({values, valid, errors}: FormSubmitEvent) => {
           })
         })
         .finally(() => {
-          pending.value = false
+          loading.value = false
         })
   } else {
+    loading.value = false
     for (const e in errors) {
       toastService.add({
         severity: 'error',
@@ -110,7 +107,7 @@ const requestAccount = async ({values, valid, errors}: FormSubmitEvent) => {
               </FloatLabel>
               <Message v-if="$field.invalid" severity="error" size="small" variant="simple">{{ $field.error.message }}</Message>
             </FormField>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-2 md:col-span-3">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-2 gap-y-3 md:col-span-3">
               <FormField v-slot="$field" name="email" initialValue="" class="space-y-1">
                 <FloatLabel variant="on" class="md:col-span-1">
                   <InputText id="email" class="w-full" type="text"/>
@@ -120,7 +117,7 @@ const requestAccount = async ({values, valid, errors}: FormSubmitEvent) => {
               </FormField>
               <FormField v-slot="$field" name="countyId" initialValue="" class="space-y-1">
                 <FloatLabel variant="on" class="md:col-span-1">
-                  <Select id="countyId" :options="counties?.data?.sort((a, b) => a.name.localeCompare(b.name))" optionLabel="name" optionValue="id" fluid showClear />
+                  <Select id="countyId" :options="counties?.data?.sort((a, b) => a.name.localeCompare(b.name))" filter optionLabel="name" optionValue="id" :loading="pending" fluid showClear />
                   <label for="countyId">County of Assignment</label>
                 </FloatLabel>
                 <Message v-if="$field.invalid" severity="error" size="small" variant="simple">{{ $field.error.message }}</Message>
@@ -159,7 +156,7 @@ const requestAccount = async ({values, valid, errors}: FormSubmitEvent) => {
             <NuxtLink to="/auth/login" class="hover:underline hover:underline-offset-4 text-blue-500 text-sm">Login</NuxtLink>
             <NuxtLink to="/auth/forgot-password" class="hover:underline hover:underline-offset-4 text-blue-500 text-sm">Forgot Password?</NuxtLink>
           </div>
-          <Button label="Request Account" class="w-full" type="submit" :disabled="pending" :loading="pending" />
+          <Button label="Request Account" class="w-full" type="submit" :disabled="loading" :loading="loading" />
         </Form>
       </template>
     </Card>
