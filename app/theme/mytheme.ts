@@ -20,17 +20,17 @@ const MyPreset = definePreset(Aura, {
             light: {
                 surface: {
                     0: '#ffffff',
-                    50: '{zinc.50}',
-                    100: '{zinc.100}',
-                    200: '{zinc.200}',
-                    300: '{zinc.300}',
-                    400: '{zinc.400}',
-                    500: '{zinc.500}',
-                    600: '{zinc.600}',
-                    700: '{zinc.700}',
-                    800: '{zinc.800}',
-                    900: '{zinc.900}',
-                    950: '{zinc.950}'
+                    50: '{slate.50}',
+                    100: '{slate.100}',
+                    200: '{slate.200}',
+                    300: '{slate.300}',
+                    400: '{slate.400}',
+                    500: '{slate.500}',
+                    600: '{slate.600}',
+                    700: '{slate.700}',
+                    800: '{slate.800}',
+                    900: '{slate.900}',
+                    950: '{slate.950}'
                 }
             },
             dark: {
@@ -47,11 +47,12 @@ const MyPreset = definePreset(Aura, {
                     800: '{slate.800}',
                     900: '{slate.900}',
                     950: '{slate.950}'
-                }
+                },
+
             }
         },
         formField: {
-            borderRadius: '0.125em'
+            borderRadius: '0.25em'
         }
     },
     components: {
@@ -60,20 +61,18 @@ const MyPreset = definePreset(Aura, {
             bodyPadding: '1rem',
         },
         button: {
-            borderRadius: '0.125em'
+            borderRadius: '0.25em',
         },
         select: {
             overlay: {
-                borderRadius: '0.125em'
+                borderRadius: '0.25em'
             },
             option: {
-                borderRadius: '0.125em',
+                borderRadius: '0.25em',
             }
         },
-    }
+    },
 });
 
-export default {
-    preset: MyPreset,
-};
+export default { preset: MyPreset };
 
