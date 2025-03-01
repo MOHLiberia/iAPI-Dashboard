@@ -1,8 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Dashboard',
+  label: 'Dashboard',
   icon: 'tabler:home-2',
-  layout:'default'
 })
 
 const useUser = useUserStore()

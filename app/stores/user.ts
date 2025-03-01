@@ -2,6 +2,8 @@ import {defineStore} from 'pinia'
 
 export const useUserStore = defineStore('user', () =>{
     const user = ref({})
+    const accessToken = useCookie('access_token')
+    const refreshToken = useCookie('refresh_token')
 
     const reset = () => {
         user.value = {}
@@ -15,6 +17,5 @@ export const useUserStore = defineStore('user', () =>{
         return user.value
     }
 
-    return { setUser, reset, user }
-
+    return { setUser, reset, getUser, accessToken, refreshToken }
 })

@@ -1,52 +1,44 @@
 <script setup lang="ts">
-import {capitalizeFirstLetter} from "~/utils";
-
-interface Breadcrumb {
-  label: string;
-  to: string;
-  icon: string | undefined;
-}
+import type {RouteRecordNormalized} from "#vue-router";
 
 const route = useRoute();
 const router = useRouter();
-
-const breadcrumbs = ref<Breadcrumb[]>([])
+const breadcrumbs = ref([])
 
 watchEffect(() => {
-  const segments = route.path.split('/').filter((segment) => segment);
-  breadcrumbs.value = segments.map((segment, index) => {
-    const to = '/' + segments.slice(0, index + 1).join('/');
+  breadcrumbs.value= [];
+  const fullPath = route.path
+  const requestPath = fullPath.startsWith("/") ? fullPath.substring(1) : fullPath
+  const crumbs = requestPath.split("/")
+  let path = ""
 
-    const matchedRoute = route.matched[index]
-
-    return {
-      label: capitalizeFirstLetter(segment),
-      to: to,
-      icon: matchedRoute?.meta.icon,
+  crumbs.forEach((crumb) => {
+    if (crumb) {
+      path = `${path}/${crumb}`;
+      const breadcrumb = router.getRoutes().find((r) => r.path === path);
+      if (breadcrumb) {
+        breadcrumbs.value.push(breadcrumb);
+      }
     }
   })
 
-  if (typeof route.name === 'string' && segments[segments.length - 1] !== route.name) {
-    breadcrumbs.value.push({
-      label: capitalizeFirstLetter(route.name),
-      to: route.fullPath,
-      icon: route.meta.icon,
-    })
+  if (!breadcrumbs.value.some(breadcrumb => breadcrumb.path === route.path)) {
+    breadcrumbs.value.push(route);
   }
 })
-
-
 </script>
 
 <template>
-  {{breadcrumbs}}
-  <Breadcrumb :model="breadcrumbs">
+  <Breadcrumb :model="breadcrumbs" class="rounded w-fit !p-2 !bg-transparent">
     <template #item="{item, props}">
-      <NuxtLink :to="item.to">
-<!--        <Icon :name="item.icon"/>-->
-        {{item.icon}}
-        <span>{{item.label}}</span>
+      <NuxtLink v-if="item.path" :to="item.path" class="flex gap-1 items-center group">
+        <Icon :name="item.meta?.icon" size="1.25rem"/>
+        <span class="group-hover:underline underline-offset-4">{{item.meta.label}}</span>
       </NuxtLink>
+      <div v-else class="flex gap-1 items-center">
+        <Icon :name="item?.icon" size="1.25rem"/>
+        <span>{{item?.label}}</span>
+      </div>
     </template>
   </Breadcrumb>
 </template>

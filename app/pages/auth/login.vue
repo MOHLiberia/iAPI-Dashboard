@@ -23,6 +23,7 @@ const login = async ({valid, values, errors}: FormSubmitEvent) => {
   if (valid) {
     await auth.login(values)
   } else {
+    console.log(errors)
     for (const e in errors) {
       toastService.add({
         severity: 'error',

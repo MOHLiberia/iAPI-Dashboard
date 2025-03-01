@@ -1,8 +1,7 @@
 <script setup lang="ts">
 
 definePageMeta({
-  name: 'Application Details',
-  breadcrumb: 'Application Details',
+  label: 'Application Details',
   icon: 'tabler:app-window-filled'
 })
 

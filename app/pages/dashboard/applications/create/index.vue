@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  label: 'Account',
-  icon: 'tabler:user'
+  label: "New Application",
+  icon: "tabler:plus"
 })
 </script>
 

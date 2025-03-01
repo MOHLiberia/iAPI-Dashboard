@@ -11,7 +11,7 @@ const useUser = useUserStore()
 </script>
 
 <template>
-  <div class="h-10 w-10 rounded-full bg-slate-700 hover:bg-slate-700/80 overflow-hidden hover:cursor-pointer flex items-center justify-center" @click="togglePopover">
+  <div class="h-9 w-9 rounded-full bg-slate-300 border-2 border-slate-500 dark:bg-slate-700 dark:hover:bg-slate-700/80 overflow-hidden hover:cursor-pointer flex items-center justify-center" @click="togglePopover">
     <div class="w-full h-full text-sm flex items-center justify-center">CC</div>
   </div>
   <Popover ref="popover" class="!p-0">

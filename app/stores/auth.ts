@@ -1,18 +1,13 @@
 import { defineStore } from 'pinia'
 import { useUserStore } from "./user";
 
-interface LoginCredentials {
-    usernameOrEmail: string;
-    password: string;
-}
-
 export const useAuthStore = defineStore('auth', () => {
     const config = useRuntimeConfig()
     const toastService = usePVToastService()
     const user = useUserStore()
 
-    const accessToken = useCookie('access-token')
-    const refreshToken = useCookie('refresh-token')
+    const accessToken = useCookie('access_token')
+    const refreshToken = useCookie('refresh_token')
 
     const authenticated = ref(false)
     const pending = ref(false)
@@ -48,7 +43,27 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     const logout = async () => {
-    console.log('logout')
+        await $fetch(`${config.public.apiUrl}/auth/logout`, {
+            method: 'POST',
+            headers: {
+                'api-key': config.public.apiKey.toString(),
+                'content-type': 'application/json',
+                'authorization': `Bearer ${user.accessToken}`
+            },
+        })
+            .then(async () => {
+                user.reset()
+                authenticated.value = false
+                await navigateTo('/login')
+            })
+            .catch((err) => {
+                toastService.add({
+                    severity: 'error',
+                    summary: err.data?.status || 'Error',
+                    detail: err.data?.message || 'Something went wrong. If this continues, please get in touch with the ICT Unit.',
+                    life: 5000,
+                })
+            })
     }
 
     return {login, authenticated, pending, logout}

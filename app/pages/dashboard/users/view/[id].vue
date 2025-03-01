@@ -1,14 +1,11 @@
 <script setup lang="ts">
+
 definePageMeta({
-  label: 'Account',
-  icon: 'tabler:user'
+  label: 'User Details',
+  icon: 'tabler:user-square'
 })
 </script>
 
 <template>
-
+view user
 </template>
-
-<style scoped>
-
-</style>

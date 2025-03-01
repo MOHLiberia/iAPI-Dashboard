@@ -2,7 +2,7 @@
 import {FilterMatchMode} from "@primevue/core";
 
 definePageMeta({
-  title: "Applications",
+  label: "Applications",
   icon: "tabler:app-window"
 })
 
@@ -80,7 +80,7 @@ const {data: applications, pending} = useFetch(`${config.public.apiUrl}/applicat
         <column header="Actions" body-style="{width: fit-content}" header-style="{max-width: fit-content}">
           <template #body="slotProps">
             <div class="flex">
-              <NuxtLink :to="`applications/${slotProps.data.id}`">
+              <NuxtLink :to="`/dashboard/applications/view/${slotProps.data.id}`">
                 <Button label="View" size="small"/>
               </NuxtLink>
             </div>
