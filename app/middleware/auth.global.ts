@@ -1,16 +1,30 @@
-// noinspection JSUnusedGlobalSymbols
+import { useAuthStore } from "@/stores/auth";
 
-import {useAuthStore} from "@/stores/auth";
+export default defineNuxtRouteMiddleware(async (to, from) => {
 
-export default defineNuxtRouteMiddleware((to, from) => {
-    const useAuth = useAuthStore()
+    const path = to?.path || ''
+    const isDashboardRoute = path.includes('/dashboard');
+    const isAuthRoute = path.includes('/auth');
+    const authStore = useAuthStore();
+    const { accessToken, refreshToken } = authStore;
 
-    // if (to.fullPath.includes('/auth') && useAuth.authenticated) {
-    //     return navigateTo('/dashboard')
-    // }
-    //
-    // if (to.fullPath.includes('/dashboard')  && !useAuth.authenticated) {
-    //     console.log(to.path)
-    //     return navigateTo('/auth/login')
-    // }
-})
+    if (accessToken && refreshToken) {
+        await authStore.checkAndRefreshTokens();
+    }
+
+    if (isAuthRoute && accessToken && refreshToken) {
+        return navigateTo('/dashboard');
+    }
+
+    if (isDashboardRoute && (!authStore.accessToken || !authStore.refreshToken)) {
+        return navigateTo('/auth/login');
+    }
+
+    if (path === '/') {
+        if (accessToken && refreshToken) {
+            return navigateTo('/dashboard');
+        } else {
+            return navigateTo('/auth/login');
+        }
+    }
+});
