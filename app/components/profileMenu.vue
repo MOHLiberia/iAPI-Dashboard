@@ -8,6 +8,7 @@ const togglePopover = (e) => {
 }
 
 const useUser = useUserStore()
+const useAuth = useAuthStore()
 </script>
 
 <template>
@@ -24,7 +25,7 @@ const useUser = useUserStore()
           </NuxtLink>
         </li>
         <li class="border-t border-slate-800 my-2"/>
-        <li class="flex items-center gap-3 p-2 dark:hover:bg-red-500 hover:bg-red-500 rounded hover:cursor-pointer select-none" @click="useAuthStore().logout()">
+        <li class="flex items-center gap-3 p-2 dark:hover:bg-red-500 hover:bg-red-500 rounded hover:cursor-pointer select-none" @click="useAuth.logout()">
           <Icon name="tabler:logout" size="1.5rem"/>
           <span>Logout</span>
         </li>
