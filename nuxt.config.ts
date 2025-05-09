@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { resolve } from 'path';
 
 export default defineNuxtConfig({
   ssr: false,
@@ -26,7 +27,7 @@ export default defineNuxtConfig({
   },
   primevue: {
     importTheme: {
-      from: '@/theme/myTheme.ts'
+      from: resolve(__dirname, 'app/theme/myTheme.ts')
     },
   },
   icon: {
