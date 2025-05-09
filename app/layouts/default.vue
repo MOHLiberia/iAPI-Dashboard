@@ -10,15 +10,15 @@ const router = useRouter();
 <template>
   <div class="flex flex-col">
     <default-header v-on:openSideMenu="openSideMenu=!openSideMenu"/>
-    <div class="flex flex-1">
+    <div class="flex flex-1 overflow-hidden">
       <sideMenu :open="openSideMenu"/>
-      <div class="flex flex-col flex-1 overflow-x-hidden">
-        <div class="flex-1 p-4 overflow-x-hidden overflow-y-auto space-y-4">
+      <div class="flex-1 overflow-hidden">
+        <div class="p-4 h-full overflow-x-hidden overflow-y-auto space-y-4">
           <breadcrumbs/>
           <slot/>
         </div>
-        <default-footer/>
       </div>
     </div>
+    <default-footer/>
   </div>
 </template>
