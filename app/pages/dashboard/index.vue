@@ -8,5 +8,4 @@ const useUser = useUserStore()
 </script>
 
 <template>
-
 </template>
