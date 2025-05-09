@@ -67,19 +67,25 @@ const {data: applications, pending} = useFetch(`${config.public.apiUrl}/applicat
       </Card>
     </div>
     <div class="overflow-hidden rounded">
-      <DataTable :value="applications?.data" class="text-nowrap" :loading="pending" size="small" showGridlines>
-        <Column field="name" header="Name"/>
-        <Column field="type" header="Type"/>
-        <Column field="baseURL" header="URL"/>
-        <Column field="description" header="Description" class="!w-fit"/>
-        <Column field="status" header="Status">
+      <DataTable :value="applications?.data" paginator :rows="10" paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" currentPageReportTemplate="{first} to {last} of {totalRecords}" :loading="pending" size="small" showGridlines removableSort class="text-nowrap">
+        <Column field="name" header="Name" sortable/>
+        <Column field="type" header="Type" sortable/>
+        <Column field="baseURL" header="URL">
           <template #body="slotProps">
-              <div class="w-4 h-4 bg-red-500 rounded-full self-center animate-pulse"></div>
+            <a :href="slotProps.data.baseURL" target="_blank" class="text-blue-500 hover:underline underline-offset-2">{{slotProps.data.baseURL}}</a>
+          </template>
+        </Column>
+        <Column field="description" header="Description" class="!w-fit"/>
+        <Column field="status" header="Status" class="w-[100px]">
+          <template #body="slotProps">
+            <div class="flex justify-center">
+              <div class="w-4 h-4 bg-red-500 rounded-full self-center animate-pulse"/>
+            </div>
           </template>
         </Column>
         <column header="Actions" body-style="{width: fit-content}" header-style="{max-width: fit-content}">
           <template #body="slotProps">
-            <div class="flex">
+            <div class="flex justify-center">
               <NuxtLink :to="`/dashboard/applications/view/${slotProps.data.id}`">
                 <Button label="View" size="small"/>
               </NuxtLink>
