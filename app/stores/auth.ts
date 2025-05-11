@@ -151,7 +151,7 @@ export const useAuthStore = defineStore('auth', () => {
     return {authenticated, pending, accessToken, refreshToken, login, logout, refreshAccessToken, checkAndRefreshTokens}
 }, {
     persist: {
-        storage: localStorage,
+        storage: piniaPluginPersistedstate.localStorage(),
         pick: ['authenticated'],
     },
 })

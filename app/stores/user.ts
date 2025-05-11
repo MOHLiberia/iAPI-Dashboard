@@ -10,7 +10,7 @@ export const useUserStore = defineStore('user', () =>{
     return { user, reset }
 }, {
     persist: {
-        storage: localStorage,
+        storage: piniaPluginPersistedstate.localStorage(),
         pick: ['user'],
     }
 })
