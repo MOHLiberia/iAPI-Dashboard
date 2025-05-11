@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import
 
 export default defineNuxtConfig({
   ssr: true,
