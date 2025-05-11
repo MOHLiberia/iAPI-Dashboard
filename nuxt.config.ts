@@ -1,9 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { resolve } from 'path';
+import
 
 export default defineNuxtConfig({
-  ssr: false,
-  compatibilityDate: '2024-04-03',
+  ssr: true,
+  compatibilityDate: '2024-05-07',
   future: {
     compatibilityVersion: 4
   },
@@ -26,12 +26,18 @@ export default defineNuxtConfig({
     }
   },
   primevue: {
-    importTheme: {
-      from: resolve(__dirname, 'app/theme/myTheme.ts')
-    },
+    importTheme: { from: '@/theme/myTheme.ts' },
   },
   icon: {
     provider: 'iconify',
     serverBundle: 'local'
+  },
+  build: {
+    transpile: ['@/']
+  },
+  vite: {
+    server: {
+      allowedHosts: true
+    }
   }
 })

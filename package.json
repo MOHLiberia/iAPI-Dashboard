@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "start": "node .output/server/index.mjs",
-    "build": "nuxt build",
+    "build": "DEBUG=* nuxt build",
     "dev": "nuxt dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
