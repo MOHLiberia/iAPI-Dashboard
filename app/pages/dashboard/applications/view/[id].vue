@@ -240,14 +240,19 @@ const getLogSeverity = (log: 'Info' | 'Warning' | 'Error') => {
         <DataTable :value="application?.data?.userSessions" paginator :rows="10" paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" currentPageReportTemplate="{first} to {last} of {totalRecords}" class="text-nowrap" :loading="pending" size="small" showGridlines>
           <Column field="id" header="id"/>
           <Column field="user.username" header="Username"/>
-          <Column field="createdAt" header="Time">
-            <template #body="slotProps">
-              <div>{{ new Date(slotProps.data.createdAt).toLocaleString() }}</div>
-            </template>
-          </Column>
           <Column field="application.name" header="Application"/>
           <Column field="operatingSystem" header="OS"/>
           <Column field="organization" header="IP Address"/>
+          <Column field="createdAt" header="Date">
+            <template #body="slotProps">
+              <div>{{ new Date(slotProps.data.createdAt).toLocaleDateString('en-us', {month: 'short', day: '2-digit', year: 'numeric'}) }}</div>
+            </template>
+          </Column>
+          <Column field="createdAt" header="Time">
+            <template #body="slotProps">
+              <div>{{ new Date(slotProps.data.createdAt).toLocaleTimeString() }}</div>
+            </template>
+          </Column>
           <Column field="status" header="Status">
             <template #body="slotProps">
               <div class="flex justify-center">
