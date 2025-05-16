@@ -59,6 +59,7 @@ export const useAuthStore = defineStore('auth', () => {
                 'content-type': 'application/json',
                 'authorization': `Bearer ${accessToken.value}`
             },
+            credentials: "include"
         })
             .then(async (res: any) => {
                 authenticated.value = false
