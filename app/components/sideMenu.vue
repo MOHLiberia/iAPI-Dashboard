@@ -10,15 +10,7 @@ const useUser = useUserStore()
 </script>
 
 <template>
-  <Transition
-      enter-active-class="transition-all duration-300 ease-in-out"
-      leave-active-class="transition-all duration-300 ease-in-out"
-      enter-from-class="opacity-0 -translate-x-full"
-      enter-to-class="opacity-100 translate-x-0"
-      leave-from-class="opacity-100 translate-x-0"
-      leave-to-class="opacity-0 -translate-x-full"
-  >
-    <nav class="dark:border-slate-800 border-r lg:flex flex-col hidden shrink-0" :class="props.open ? 'w-[225px]' : 'w-fit'">
+    <nav class="dark:border-slate-800 border-r lg:flex flex-col hidden shrink-0" :class="props.open ? 'w-[235px]' : 'w-fit'">
       <div class="flex-1 overflow-y-auto space-y-2 w-full p-2">
         <div class="rounded flex flex-col border dark:border-slate-800" v-for="list in menuList" :class="list.openSubmenu ? '' : ''">
           <div class="flex flex-1 dark:hover:bg-slate-800">
@@ -44,8 +36,8 @@ const useUser = useUserStore()
         <NuxtLink class="w-full rounded border dark:border-slate-800 dark:hover:bg-slate-800 hover:bg-slate-100 p-2 group flex items-center gap-4" to="/dashboard/account" v-if="open">
           <div class="h-10 w-10 rounded-full border-slate-800 bg-green-300"/>
           <div class="flex flex-col text-sm" v-show="open">
-            <div>{{useUser.user.profile.firstName}} {{useUser.user.profile.lastName}}</div>
-            <div>{{useUser.user.username}}</div>
+            <div>{{useUser.user?.profile?.firstName}} {{useUser.user?.profile?.lastName}}</div>
+            <div>{{useUser.user?.username}}</div>
           </div>
         </NuxtLink>
         <NuxtLink class="h-10 w-10 rounded-full overflow-hidden border dark:border-slate-800 dark:hover:bg-slate-800/35 group flex items-center gap-2" to="/dashboard/account" v-else>
@@ -53,5 +45,4 @@ const useUser = useUserStore()
         </NuxtLink>
       </div>
     </nav>
-  </Transition>
 </template>
