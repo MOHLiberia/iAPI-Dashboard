@@ -1,5 +1,5 @@
-import { useRoute, useRouter } from 'vue-router'
-import { ref, watch, onMounted } from 'vue'
+import {useRoute, useRouter} from 'vue-router'
+import {ref, watch, onMounted} from 'vue'
 
 interface Breadcrumb {
     path: string
@@ -53,5 +53,5 @@ export function useBreadcrumbs() {
     onMounted(updateBreadcrumbs)
     watch(() => route.path, updateBreadcrumbs)
 
-    return { breadcrumbs }
+    return {breadcrumbs}
 }

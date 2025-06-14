@@ -1,4 +1,4 @@
-export type county ={
+export type county = {
     id: string,
     name: string,
 }

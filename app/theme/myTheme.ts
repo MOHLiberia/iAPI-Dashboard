@@ -1,4 +1,4 @@
-import { definePreset } from '@primevue/themes';
+import {definePreset} from '@primevue/themes';
 import Aura from '@primevue/themes/aura';
 
 const MyPreset = definePreset(Aura, {
@@ -74,5 +74,5 @@ const MyPreset = definePreset(Aura, {
     },
 });
 
-export default { preset: MyPreset };
+export default {preset: MyPreset};
 

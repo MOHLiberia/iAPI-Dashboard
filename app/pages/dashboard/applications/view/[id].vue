@@ -158,7 +158,8 @@ const getLogSeverity = (log: 'Info' | 'Warning' | 'Error') => {
 						<FormField v-slot="$field" :initialValue="application?.data?.type" class="space-y-1"
 								   name="typr">
 							<label for="type">Type</label>
-							<Select id="type" :disabled="!isEditing" :options="types" fluid optionLabel="name" optionValue="name"
+							<Select id="type" :disabled="!isEditing" :options="types" fluid optionLabel="name"
+									optionValue="name"
 									showClear/>
 							<Message v-if="$field.invalid" severity="error" size="small" variant="simple">
 								{{ $field.error.message }}
@@ -194,7 +195,8 @@ const getLogSeverity = (log: 'Info' | 'Warning' | 'Error') => {
 						   :loading="pending" :rows="10" :value="application?.data?.AccountRequests"
 						   class="text-nowrap"
 						   currentPageReportTemplate="{first} to {last} of {totalRecords}" paginator
-						   paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" showGridlines size="small">
+						   paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+						   showGridlines size="small">
 					<template #header>
 						<div class="flex justify-between">
 							<Button label="Clear" size="small" type="button" @click="clearFilter()"/>
@@ -234,7 +236,8 @@ const getLogSeverity = (log: 'Info' | 'Warning' | 'Error') => {
 				<DataTable :loading="pending" :rows="10" :value="application?.data?.users"
 						   class="text-nowrap"
 						   currentPageReportTemplate="{first} to {last} of {totalRecords}" paginator
-						   paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" showGridlines size="small">
+						   paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+						   showGridlines size="small">
 					<Column field="profile.firstName" header="First Name"/>
 					<Column field="profile.lastName" header="Last Name"/>
 					<Column field="email" header="Email"/>
@@ -266,7 +269,8 @@ const getLogSeverity = (log: 'Info' | 'Warning' | 'Error') => {
 				<DataTable :loading="pending" :rows="10" :value="application?.data?.userSessions"
 						   class="text-nowrap"
 						   currentPageReportTemplate="{first} to {last} of {totalRecords}" paginator
-						   paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" showGridlines size="small">
+						   paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+						   showGridlines size="small">
 					<Column field="id" header="id"/>
 					<Column field="user.username" header="Username"/>
 					<Column field="application.name" header="Application"/>
@@ -318,7 +322,8 @@ const getLogSeverity = (log: 'Info' | 'Warning' | 'Error') => {
 				<DataTable :loading="pending" :rows="10" :value="application?.data?.logs"
 						   class="text-nowrap"
 						   currentPageReportTemplate="{first} to {last} of {totalRecords}" paginator
-						   paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" showGridlines size="small">
+						   paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+						   showGridlines size="small">
 					<Column class="w-fit" field="id" header="ID"/>
 					<Column field="" header="Level">
 						<template #body="slotProps">

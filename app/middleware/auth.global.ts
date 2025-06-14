@@ -1,4 +1,4 @@
-import { useAuthStore } from "@/stores/auth";
+import {useAuthStore} from "@/stores/auth";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
 
@@ -6,7 +6,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     const isDashboardRoute = path.includes('/dashboard');
     const isAuthRoute = path.includes('/auth');
     const authStore = useAuthStore();
-    const { accessToken, refreshToken } = authStore;
+    const {accessToken, refreshToken} = authStore;
 
     if (accessToken && refreshToken) {
         await authStore.checkAndRefreshTokens();

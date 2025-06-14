@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
-import { useUserStore } from "./user";
+import {defineStore} from 'pinia'
+import {useUserStore} from "./user";
 
 export const useAuthStore = defineStore('auth', () => {
     const config = useRuntimeConfig()
@@ -25,7 +25,7 @@ export const useAuthStore = defineStore('auth', () => {
             body: JSON.stringify({usernameOrEmail, password}),
         })
             .then(async (res: any) => {
-                setTokens({ accessToken: res.data?.accessToken, refreshToken: res.data?.refreshToken })
+                setTokens({accessToken: res.data?.accessToken, refreshToken: res.data?.refreshToken})
                 useUser.user = res.data?.user
                 authenticated.value = true
                 toastService.add({
@@ -145,7 +145,7 @@ export const useAuthStore = defineStore('auth', () => {
         }
 
         countdownInterval.value = setInterval(async () => {
-           await checkAndRefreshTokens()
+            await checkAndRefreshTokens()
         }, 60 * 1000)
     }
 

@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 definePageMeta({
-  label: "Account Request",
-  icon: "tabler:users-plus"
+	label: "Account Request",
+	icon: "tabler:users-plus"
 })
 
 // const config = useRuntimeConfig()

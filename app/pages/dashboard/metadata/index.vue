@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 definePageMeta({
-  label: "Metadata",
-  icon: "tabler:app-window"
+	label: "Metadata",
+	icon: "tabler:app-window"
 })
 </script>
 

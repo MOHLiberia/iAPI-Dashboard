@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 definePageMeta({
-  label: "Departments",
-  icon: "tabler:users-group"
+	label: "Departments",
+	icon: "tabler:users-group"
 })
 </script>
 

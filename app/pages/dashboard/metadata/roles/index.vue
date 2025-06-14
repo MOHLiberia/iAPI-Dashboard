@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 definePageMeta({
-  label: "Roles",
-  icon: "tabler:app-window"
+	label: "Roles",
+	icon: "tabler:app-window"
 })
 </script>
 
