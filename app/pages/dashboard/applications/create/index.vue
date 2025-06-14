@@ -89,7 +89,7 @@ const submit = async ({valid, values, errors}: FormSubmitEvent) => {
       </template>
       <template #content>
         <Form :resolver @submit="submit">
-            <div class="grid md:grid-cols-2 gap-3">
+            <div class="grid md:grid-cols-2 gap-3 mb-4">
               <FormField v-slot="$field" name="name" initialValue="" class="space-y-1">
                 <FloatLabel variant="on">
                   <label for="name">Name</label>

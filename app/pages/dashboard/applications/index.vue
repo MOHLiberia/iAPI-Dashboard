@@ -66,7 +66,8 @@ const {data: applications, pending} = useFetch(`${config.public.apiUrl}/applicat
         </template>
       </Card>
     </div>
-    <div class="overflow-hidden rounded">
+    <div class="overflow-hidden rounded flex flex-col gap-2">
+      <div class="text-lg">Applications</div>
       <DataTable :value="applications?.data" paginator :rows="10" paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" currentPageReportTemplate="{first} to {last} of {totalRecords}" :loading="pending" size="small" showGridlines removableSort class="text-nowrap">
         <Column field="name" header="Name" sortable/>
         <Column field="type" header="Type" sortable/>

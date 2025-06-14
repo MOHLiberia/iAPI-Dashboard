@@ -69,7 +69,7 @@ const cancel = () => {
       severity: 'danger',
     },
     rejectProps: {
-      label: "Continue",
+      label: "No",
       severity: "success",
     },
     accept: async () => {
@@ -80,7 +80,7 @@ const cancel = () => {
 </script>
 
 <template>
-  <div class="flex justify-center items-center h-full">
+  <div class="flex justify-center">
     <Card class="w-full md:w-fit">
       <template #title>
         Create New User
@@ -190,7 +190,7 @@ const cancel = () => {
         </Form>
       </template>
       <template #footer>
-        <div class="flex gap-2 mt-2">
+        <div class="flex gap-2">
           <Button label="Cancel" severity="danger" class="w-full" @click="cancel" />
           <Button label="Submit" severity="success" class="w-full"/>
         </div>
