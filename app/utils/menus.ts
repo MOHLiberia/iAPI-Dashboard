@@ -7,7 +7,7 @@ export const mainMenuList = [
     },
     {name: 'DHIS2', to: '', icon: 'tabler:database', permission: 'view_dhis2', role: '', openSubmenu: false, subMenu: [
         {name: 'All Instances', to: '/dashboard/dhis2', icon: 'tabler:database', permission: 'view_dhis2', role: ''},
-            {name: 'Add DHIS2 Instance', to: '/dashboard/dhis2/create', icon: 'tabler:plus', permission: 'add_dhis2_instance', role: ''},
+            {name: 'Add DHIS2 Instance', to: '/dashboard/dhis2/add', icon: 'tabler:plus', permission: 'add_dhis2_instance', role: ''},
         ]},
     {name: 'Users', to: '', icon: 'tabler:users', permission: 'view_users', role: '', subMenu: [
             {name: 'All Users', to: '/dashboard/users', icon: 'tabler:user', permission: 'create_user', role: 'admin'},
